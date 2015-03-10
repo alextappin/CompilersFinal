@@ -33,17 +33,13 @@ program:    stmts               {}
 stmts:      stmts stmt          {}
         |   stmt                {}
 
-stmt:       expr ident          {}
-        |   expr PRINT          {}
+stmt:       expr PRINT          {}
         |   END                 {}
 ident:      expr IDENTIFIER     {}
-oper:       expr OPERATOR       {}
 expr:       INT_VAL             {}
-        |   IDENTIFIER          {}
-        |   expr oper                {}
-
-
-
+        |   expr expr OPERATOR  {}
+        |   ident               {}
+        
 
 %%
 
