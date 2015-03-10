@@ -7,6 +7,5 @@
 #define INT_VAL 1011
 #define IDENTIFIER 1013
 #define OPERATOR 1014
-#define JUNK_TOKEN 2000
 
 #endif

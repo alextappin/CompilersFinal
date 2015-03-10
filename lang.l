@@ -7,7 +7,7 @@
 //#include "cSymbolTable.h"
 #include "lex.h"
 #include "tokens.h"
-//#include "langparse.h"
+#include "langparse.h"
 
 #define RETURN(a) return Return(a);
 static int Return(int val);
@@ -21,7 +21,7 @@ static int Return(int val);
     /* definitions go here. period is an example. */
 
 identifiers         [a-z][a-z]*
-integer             [-]?[0-9]+
+integer             [-]?[0-9]
 operators           [*\-+\/]
 comments            "//".*$
 whitespace          [' '\t\n]*
@@ -37,14 +37,13 @@ whitespace          [' '\t\n]*
                                 RETURN(INT_VAL);
                             }
 {operators}                 RETURN(yytext[0]);
-{whitespace}                //no whitespace
-.                           RETURN(JUNK_TOKEN);
+{whitespace}                //no whitespace;
 %%
 
     // This function allows us to do extra processing on each token
 static int Return(int val)
 {
-    //printf("Scanned '%s': %d\n", yytext, val);
+    printf("Scanned '%s': %d\n", yytext, val);
     return val;
 }
 

@@ -2,9 +2,9 @@
 
 %{
 #include <iostream>
-#include "cSymbol.h"
-#include "cSymbolTable.h"
-#include "cAstNode.h"
+//#include "cSymbol.h"
+//#include "cSymbolTable.h"
+//#include "cAstNode.h"
 #include "lex.h"
 %}
 
@@ -14,7 +14,11 @@
     {
         int                 int_val;
     }
+%{
+    int yyerror(const char *msg);
 
+    void *yyast_root;
+%}
 
 %token <int_val>    INT_VAL
 
@@ -43,4 +47,10 @@ expr:       INT_VAL             {}
 
 %%
 
+int yyerror(const char *msg)
+{
+    std::cerr << "ERROR: " << msg << " at symbol "
+        << yytext << " on line " << yylineno << "\n";
 
+    return 0;
+}
