@@ -2,9 +2,6 @@
 
 %{
 #include <iostream>
-//#include "cSymbol.h"
-//#include "cSymbolTable.h"
-//#include "cAstNode.h"
 #include "lex.h"
 %}
 
@@ -17,7 +14,6 @@
 %{
     int yyerror(const char *msg);
 
-    void *yyast_root;
 %}
 
 %token <int_val>    INT_VAL
@@ -32,14 +28,14 @@
 
 %%
 
-program:    stmts               {}
+program:    stmts END ';'       {}
 
 stmts:      stmts stmt          {}
         |   stmt                {}
 
-stmt:       expr PRINT          {}
-        |   END                 {}
-ident:      expr IDENTIFIER     {}
+stmt:       expr PRINT ';'      {}
+        |   END ';'             {}
+ident:      expr IDENTIFIER ';' {}
 expr:       INT_VAL             {}
         |   expr expr OPERATOR  {}
         |   ident               {}
